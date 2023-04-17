@@ -12,7 +12,7 @@ class PizzaController extends Controller
      */
     public function index()
     {
-        return view('admin.pizzas');
+        return view('admin.pizza.index', ['pizzas' => Pizza::all()]);
     }
 
     /**
@@ -20,7 +20,7 @@ class PizzaController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.pizza.create');
     }
 
     /**
@@ -44,7 +44,7 @@ class PizzaController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view('admin.pizza.edit', ['pizza' => Pizza::getById($id)]);
     }
 
     /**

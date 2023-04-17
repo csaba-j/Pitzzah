@@ -1,3 +1,3 @@
 <x-admin-layout>
-    PIZZA TIME
+    Add new pizza
 </x-admin-layout>

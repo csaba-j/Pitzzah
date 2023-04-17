@@ -53,7 +53,10 @@ Route::middleware('admin')->group(function() {
         'names' => [
             'index' => 'pizza.index',
             'store' => 'pizza.store',
-            'create' => 'pizza.create'
+            'create' => 'pizza.create',
+            'edit' => 'pizza.edit',
+            'update' => 'pizza.update',
+            'destroy' => 'pizza.destroy'
         ]
     ]);
         Route::resource('orders', OrderController::class, [
