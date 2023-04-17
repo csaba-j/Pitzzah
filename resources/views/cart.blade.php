@@ -1,7 +1,3 @@
-<header>
-    @vite(['resources/js/calculatePrice.js'])
-</header>
-
 <x-app-layout>
 
     <x-slot name="header">
@@ -14,7 +10,6 @@
                 @csrf
                     <button type="submit" class="rounded bg-pizzared mx-16 mb-4 p-2 md:px-6 md:py-4">Kosár törlése</button>
                 </form>
-                <div>Total: <span id="total"></span></div>
                 @foreach($cart as $pizza)
                 <div class="p-3 sm:p-6 text-gray-900 shadow-lg flex flex-wrap gap-x-2 justify-between">
                     <img src="{{asset($pizza->img)}}" alt="pizza" class="w-4/12 relative row-start-4 row-end-7">
