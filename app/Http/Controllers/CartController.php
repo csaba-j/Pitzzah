@@ -17,6 +17,11 @@ class CartController extends Controller
         return redirect()->back();
     }
 
+    public function edit(Request $request) {
+        Session::has('cart') ? CartService::editItem($request) : throw new Exception('Cart is null on edit.');
+        return redirect()->back();
+    }
+
     public function delete() {
         CartService::deleteCart();
         return redirect()->to('dashboard');

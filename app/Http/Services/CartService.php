@@ -27,6 +27,20 @@ class CartService
         Session::flash('message', 'Hozzáadva a kosárhoz!');
     }
 
+    public static function editItem(Request $request) {
+        $id = $request->get('id');
+        $cart = Session::get('cart');
+        if(isset($cart[$id])) {
+            $cart[$id]['amount'] = $request->get('amount');
+            $cart[$id]['subtotal'] = $request->get('amount') * $cart[$id]['price'];
+        } else {
+            Session::flash('error', 'Nincs ilyen tétel a kosárban!');
+        }
+
+        Session::put('cart', $cart);
+        Session::flash('message', 'Sikeres szerkesztés!');
+    }
+
     public static function deleteCart() {
         Session::forget('cart');
         Session::flash('message', 'A kosár törölve.');

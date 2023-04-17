@@ -31,7 +31,7 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        $cart = Session::get('cart');
+        $cart = Session::has('cart') ? Session::get('cart') : throw new Exception('Cart is null on order store.');
         $order = Order::create([
             'user_id' => Auth::id(),
             'items' => $cart,
