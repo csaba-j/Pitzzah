@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use App\Http\Services\CartService;
 
+use Exception;
+
 class OrderController extends Controller
 {
     /**
@@ -32,14 +34,15 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         $cart = Session::has('cart') ? Session::get('cart') : throw new Exception('Cart is null on order store.');
+        $total = Session::has('total') ? Session::get('total') : throw new Exception('Total is null on order store.');
         $order = Order::create([
             'user_id' => Auth::id(),
             'items' => $cart,
-            'total' => Session::has('total') ? Session::get('total') : throw new Exception('Total is null on order store.')
+            'total' => $total
         ]);
-        Session::flash('message', 'A megrendelését sikeresen fogadtuk!');
         Session::forget('cart');
-        return redirect()->to('dashboard');
+        Session::forget('total');
+        return view('thankyou', ['cart' => $cart, 'total' => $total]);
     }
 
     /**

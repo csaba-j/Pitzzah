@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Http\Services\CartService;
 
+use Exception;
+
 class CartController extends Controller
 {
     public function show() {
