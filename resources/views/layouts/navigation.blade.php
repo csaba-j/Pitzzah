@@ -37,6 +37,9 @@
                     <x-nav-link :href="route('login')" :active="request()->routeIs('login')">
                             {{ __('Bejelentkezés') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('register')" :active="request()->routeIs('register')">
+                            {{ __('Regisztráció') }}
+                    </x-nav-link>
                     @endif
                 </div>
             </div>
@@ -116,6 +119,9 @@
         @else
         <x-responsive-nav-link :href="route('login')" :active="request()->routeIs('login')">
                 {{ __('Bejelentkezés') }}
+        </x-responsive-nav-link>
+        <x-responsive-nav-link :href="route('register')" :active="request()->routeIs('register')">
+                {{ __('Regisztráció') }}
         </x-responsive-nav-link>
         @endif
         </div>
