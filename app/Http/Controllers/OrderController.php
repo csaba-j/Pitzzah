@@ -29,7 +29,13 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $cart = Session::get('cart');
+        $order = Order::create([
+            'user_id' => Auth::id(),
+            'items' => $cart,
+            'total' => $cart['total']
+        ]);
+        return redirect()->back();
     }
 
     /**
