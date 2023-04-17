@@ -17,7 +17,9 @@ class OrderController extends Controller
      */
     public function index()
     {
-        return view('admin.orders');
+        return view('admin.orders', [
+            'orders' => Order::orderBy('created_at', 'desc')->get()
+        ]);
     }
 
     /**
@@ -37,6 +39,7 @@ class OrderController extends Controller
         $total = Session::has('total') ? Session::get('total') : throw new Exception('Total is null on order store.');
         $order = Order::create([
             'user_id' => Auth::id(),
+            'user_name' => Auth::user()->name,
             'items' => $cart,
             'total' => $total
         ]);
