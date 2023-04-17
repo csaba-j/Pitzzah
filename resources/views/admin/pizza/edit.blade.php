@@ -3,6 +3,7 @@
         <div class="max-w-7xl mx-auto sm:px-4 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg md:max-w-7xl">
                 <div class="p-3 sm:p-6 text-gray-900 shadow-lg">
+                <a href="{{url()->previous()}}"><button class="w-1/4 bg-pizzaname py-2 px-4">Vissza</button></a>
                     <form method="POST" name="confirmPizzaEdit" action="{{ route('pizza.update', ['pizza' => $pizza]) }}" enctype="multipart/form-data"
                         class="flex flex-col flex-wrap gap-y-2"
                     >
@@ -22,12 +23,12 @@
                             <label for="name">Ár (Forint)</label>
                             <input type="number" name="price" value="{{$pizza->price}}">
                         </div>
-                        <button type="submit" class="rounded bg-lime-500 basis-full w-full mt-4 md:mt-6 p-2 md:px-6 md:py-4">
+                        <button type="submit" class="rounded bg-lime-500 w-full mt-4 md:mt-6 p-2 md:px-6 md:py-4">
                             Mentés
                         </button>
                     </form>
                     <a href="{{route('pizza.confirmdelete', ['id' => $pizza->id])}}">
-                        <button class="rounded bg-pizzared basis-full w-full mt-4 md:mt-6 p-2 md:px-6 md:py-4">
+                        <button class="rounded bg-pizzared w-full mt-4 md:mt-6 p-2 md:px-6 md:py-4">
                             Törlés
                         </button>
                     </a>
