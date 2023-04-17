@@ -29,7 +29,16 @@ class PizzaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $new_filename = $request->file('img')->getClientOriginalName().'.'.$request->file('img')->getClientOriginalExtension();
+        $pizza = Pizza::create([
+            'name' => $request->get('name'),
+            'category' => $request->get('category'),
+            'price' => $request->get('price'),
+            'img' => $new_filename
+        ]);
+        $request->file('img')->storeAs('/', $new_filename, 'public');
+
+        return redirect()->to('/pizza');
     }
 
     /**
@@ -58,7 +67,6 @@ class PizzaController extends Controller
         if ($request->hasFile('img')) { 
             $new_filename = $pizza->id.'.'.$request->file('img')->getClientOriginalExtension();
             Storage::disk('public')->delete($pizza->img);
-           // Storage::disk('public')->put($new_filename, $request->file('img'));
             $request->file('img')->storeAs('/', $new_filename, 'public');
             $pizza->img = $new_filename;
         }

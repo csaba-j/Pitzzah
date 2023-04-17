@@ -10,15 +10,10 @@
                         {{$pizza->name}} <br> {{$pizza->price}} Ft. <br> <span class="text-xs md:text-base">{{$pizza->category}}</span>
                     </div>
                         <a href="{{ route('pizza.edit', ['pizza' => $pizza]) }}">
-                            <button class="rounded bg-pizzared mt-4 md:mt-6 p-2 md:px-6 md:py-4">
+                            <button class="rounded bg-pizzaname mt-4 md:mt-6 p-2 md:px-6 md:py-4">
                                 Szerkesztés
                             </button>
                         </a>
-                        <form method="POST" name="removeForm" action="{{ route('cart.remove') }}">
-                        @csrf
-                            <input type="number" name="id" value="{{$pizza->id}}" hidden>
-                            <button type="submit" class=" rounded bg-pizzared mt-4 md:mt-6 p-2 md:px-6 md:py-4">Eltávolít</button>
-                        </form>
                 </div>    
                 @endforeach
             </div>
