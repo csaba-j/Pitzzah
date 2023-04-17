@@ -14,6 +14,9 @@ module.exports = {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
         },
+        colors: {
+            'pizzared': '#ff2b06'
+        }
     },
 
     plugins: [require('@tailwindcss/forms')],
