@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Order;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+use App\Http\Services\CartService;
 
 class OrderController extends Controller
 {
@@ -33,9 +35,11 @@ class OrderController extends Controller
         $order = Order::create([
             'user_id' => Auth::id(),
             'items' => $cart,
-            'total' => $cart['total']
+            'total' => CartService::calculateTotal()
         ]);
-        return redirect()->back();
+        Session::flash('message', 'A megrendelését sikeresen fogadtuk!');
+        Session::forget('cart');
+        return redirect()->to('dashboard');
     }
 
     /**

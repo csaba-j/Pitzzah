@@ -13,6 +13,7 @@ class CartService
     public static function addToCart(Request $request) {
         $pizza = Pizza::getById($request->get('id'));
         $cart = Session::get('cart') ?: [];
+
         if(isset($cart[$pizza->id])) {
             $cart[$pizza->id]['amount'] += $request->get('amount');
             $cart[$pizza->id]['subtotal'] += $request->get('amount') * $pizza->price;
@@ -21,6 +22,7 @@ class CartService
             $cart[$pizza->id]['amount'] = $request->get('amount');
             $cart[$pizza->id]['subtotal'] = $request->get('amount') * $pizza->price;
         }
+
         Session::put('cart', $cart);
         Session::flash('message', 'Hozzáadva a kosárhoz!');
     }
@@ -35,5 +37,14 @@ class CartService
         unset($cart[$request->get('id')]);
         count($cart) > 0 ? Session::put('cart', $cart ) : Session::forget('cart');
         Session::flash('message', 'A tétel törölve.');
+    }
+
+    public static function calculateTotal() {
+        $cart = Session::get('cart');
+        $total = 0;
+        foreach($cart as $item){
+            $total += $item['subtotal'];
+        }
+        return $total;
     }
 }

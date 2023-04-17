@@ -20,7 +20,7 @@
                     </x-nav-link>
                     @if(Session::has('cart'))
                     <x-nav-link class="" :href="route('cart.show')" :active="request()->routeIs('cart.show')">
-                        <img src="{{asset('cart.png')}}">
+                        <div class="inline-flex flex-row gap-x-2 items-center"><img src="{{asset('cart.png')}}"><span class="m-0">Kosár</span></div>
                     </x-nav-link>
                     @endif
                 </div>
@@ -81,6 +81,11 @@
             <x-responsive-nav-link :href="route('order.create')" :active="request()->routeIs('order.create')">
                 {{ __('Rendelés') }}
             </x-responsive-nav-link>
+            @if(Session::has('cart'))
+                    <x-responsive-nav-link class="" :href="route('cart.show')" :active="request()->routeIs('cart.show')">
+                        <div class="inline-flex flex-row gap-x-2 items-center">Kosár<img src="{{asset('cart.png')}}"></div>
+                    </x-responsive-nav-link>
+            @endif
         </div>
 
         <!-- Responsive Settings Options -->
