@@ -12,6 +12,10 @@ class CartController extends Controller
         return view('cart', ['cart' => Session::get('cart')]);
     }
 
+    public function get() {
+        return Session::get('cart');
+    }
+
     public function add(Request $request) {
         CartService::addToCart($request);
         return redirect()->back();
