@@ -20,19 +20,19 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard', ['pizzas' => \App\Models\Pizza::all()]);
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
-Route::get('/cart', [CartController::class, 'show'])->name('cart.show');
-
-Route::resource('order', OrderController::class, [
-    'names' => [
-        'store' => 'order.store',
-        'create' => 'order.create'
-    ]
-])->middleware(['auth', 'verified']);
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::resource('order', OrderController::class, [
+        'names' => [
+            'store' => 'order.store',
+            'create' => 'order.create'
+        ]
+    ]);
+    Route::get('/dashboard', function () {
+        return view('dashboard', ['pizzas' => \App\Models\Pizza::all()]);
+    })->middleware(['auth', 'verified'])->name('dashboard');
+    Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
+    Route::get('/cart', [CartController::class, 'show'])->name('cart.show');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
