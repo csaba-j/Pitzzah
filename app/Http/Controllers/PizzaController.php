@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Pizza;
+use Illuminate\Support\Facades\Storage;
 
 class PizzaController extends Controller
 {
@@ -52,7 +53,17 @@ class PizzaController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $pizza = Pizza::getById($id);
+        $pizza->fill($request->only(['name', 'price', 'category']));
+        if ($request->hasFile('img')) { 
+            $new_filename = $pizza->id.'.'.$request->file('img')->getClientOriginalExtension();
+            Storage::disk('public')->delete($pizza->img);
+           // Storage::disk('public')->put($new_filename, $request->file('img'));
+            $request->file('img')->storeAs('/', $new_filename, 'public');
+            $pizza->img = $new_filename;
+        }
+        $pizza->save();
+        return redirect()->back();
     }
 
     /**
