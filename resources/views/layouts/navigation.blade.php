@@ -15,13 +15,22 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Kezdőlap') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('order.create')" :active="request()->routeIs('order.create')">
-                        {{ __('Rendelés') }}
-                    </x-nav-link>
-                    @if(Session::has('cart'))
-                    <x-nav-link class="" :href="route('cart.show')" :active="request()->routeIs('cart.show')">
-                        <div class="inline-flex flex-row gap-x-2 items-center"><img src="{{asset('cart.png')}}"><span class="m-0">Kosár</span></div>
-                    </x-nav-link>
+                    @if(Auth::user()->is_admin)
+                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                            {{ __('Pizzák') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                            {{ __('Rendelések') }}
+                        </x-nav-link>
+                    @else
+                        <x-nav-link :href="route('order.create')" :active="request()->routeIs('order.create')">
+                            {{ __('Rendelés') }}
+                        </x-nav-link>
+                        @if(Session::has('cart'))
+                        <x-nav-link class="" :href="route('cart.show')" :active="request()->routeIs('cart.show')">
+                            <div class="inline-flex flex-row gap-x-2 items-center"><img src="{{asset('cart.png')}}"><span class="m-0">Kosár</span></div>
+                        </x-nav-link>
+                        @endif
                     @endif
                 </div>
             </div>
