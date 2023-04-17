@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\PizzaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,7 +27,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
             'store' => 'order.store',
             'create' => 'order.create'
         ]
-    ]);
+    ])->only(['store', 'create']);
+
     Route::get('/dashboard', function () {
         return view('dashboard', ['pizzas' => \App\Models\Pizza::all()]);
     })->middleware(['auth', 'verified'])->name('dashboard');
@@ -44,6 +46,29 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+Route::middleware('admin')->group(function() {
+    Route::resource('pizza', PizzaController::class, [
+        'names' => [
+            'index' => 'pizza.index',
+            'store' => 'pizza.store',
+            'create' => 'pizza.create',
+            'edit' => 'pizza.edit',
+            'update' => 'pizza.update',
+            'destroy' => 'pizza.destroy'
+        ]
+    ]);
+
+    Route::get('pizza/{id}/confirmdelete', function($id){
+        return view('admin.pizza.confirm-delete', ['pizza' => \App\Models\Pizza::getById($id)]);
+    })->name('pizza.confirmdelete');
+
+        Route::resource('orders', OrderController::class, [
+        'names' => [
+            'index' => 'orders.index',
+        ]
+    ])->only(['index']);
 });
 
 require __DIR__.'/auth.php';
