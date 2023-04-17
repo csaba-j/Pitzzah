@@ -15,10 +15,12 @@ class CartService
         $cart = Session::get('cart') ?: [];
         if(isset($cart[$pizza->id])) {
             $cart[$pizza->id]['amount'] += $request->get('amount');
+            $cart[$pizza->id]['subtotal'] += $request->get('amount') * $pizza->price;
         } else {
             $cart[$pizza->id] = $pizza;
             $cart[$pizza->id]['amount'] = $request->get('amount');
-         }
+            $cart[$pizza->id]['subtotal'] = $request->get('amount') * $pizza->price;
+        }
         Session::put('cart', $cart);
         Session::flash('message', 'Hozzáadva a kosárhoz!');
     }
