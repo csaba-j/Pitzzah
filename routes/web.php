@@ -23,7 +23,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/order', function () {
-    return view('order');
+    return view('order',  ['pizzas' => \App\Models\Pizza::all()]);
 })->middleware(['auth', 'verified'])->name('order');
 
 Route::middleware('auth')->group(function () {

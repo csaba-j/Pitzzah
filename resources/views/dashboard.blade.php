@@ -9,7 +9,7 @@
                 <div class="p-6 text-gray-900 shadow-lg grid grid-rows-18 grid-columns-1 grid-flow-row">
                     <div class="bg-pizzaname rounded text-right w-3/5 row-span-1 row-start-1 row-end-3 justify-self-end">{{$pizza->name}}</div>
                     <div class="bg-pizzaname rounded text-right w-3/5 row-span-1 row-start-3 row-end-4 justify-self-end">{{$pizza->price}} Ft.</div>
-                    <img src="{{asset($pizza->img)}}" alt="pizza" class="w-60 z-0 relative row-start-4 row-end-7">
+                    <img src="{{asset($pizza->img)}}" alt="pizza" class="max-w-24 lg:w-60 relative row-start-4 row-end-7">
                 </div>    
                 @endforeach
             </div>
