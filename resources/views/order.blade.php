@@ -15,10 +15,10 @@
                         @csrf
                         <div class="text-sm sm:text-lg">
                                 <input type="number" name="id" value="{{$pizza->id}}" hidden>
-                                <input type="number" name="amount" step="1" min="0" class="w-20">
+                                <input type="number" name="amount" step="1" min="0" class="w-20 md:w-60">
                                 <label for="amount">db</label>
                         </div>
-                        <button type="submit">Send</button>
+                        <button type="submit" class=" rounded bg-pizzaname mt-4 md:mt-6 p-2 md:px-6 md:py-4">Kosárba</button>
                     </form>
                 </div>    
                 @endforeach
