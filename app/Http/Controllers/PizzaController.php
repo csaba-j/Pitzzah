@@ -12,7 +12,7 @@ class PizzaController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.pizzas');
     }
 
     /**

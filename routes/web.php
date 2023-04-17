@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\PizzaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -44,6 +45,16 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+Route::middleware('admin')->group(function() {
+    Route::resource('pizza', PizzaController::class, [
+        'names' => [
+            'index' => 'pizza.index',
+            'store' => 'pizza.store',
+            'create' => 'pizza.create'
+        ]
+    ]);
 });
 
 require __DIR__.'/auth.php';
