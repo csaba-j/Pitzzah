@@ -19,7 +19,7 @@ class PizzaFactory extends Factory
         return [
             'name' => fake()->name(),
             'category' => fake()->bs(),
-            'img' => asset('pizza1.png'),
+            'img' => 'pizza1.png',
             'price' => 3000
         ];
     }
