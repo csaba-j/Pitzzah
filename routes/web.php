@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\OrderController;
-use App\Http\Services\CartService;
+use App\Http\Controllers\CartController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,7 +24,8 @@ Route::get('/dashboard', function () {
     return view('dashboard', ['pizzas' => \App\Models\Pizza::all()]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::post('/cart/add', [CartService::class, 'addToCart'])->name('cart.add');
+Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
+Route::get('/cart', [CartController::class, 'show'])->name('cart.show');
 
 Route::resource('order', OrderController::class, [
     'names' => [

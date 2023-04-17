@@ -22,6 +22,5 @@ class CartService
          }
         Session::put('cart', $cart);
         Session::flash('message', 'Hozzáadva a kosárhoz!');
-        return redirect()->back();
     }
 }
