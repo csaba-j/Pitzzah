@@ -27,7 +27,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
             'store' => 'order.store',
             'create' => 'order.create'
         ]
-    ]);
+    ])->only(['store', 'create']);
+
     Route::get('/dashboard', function () {
         return view('dashboard', ['pizzas' => \App\Models\Pizza::all()]);
     })->middleware(['auth', 'verified'])->name('dashboard');
@@ -55,6 +56,11 @@ Route::middleware('admin')->group(function() {
             'create' => 'pizza.create'
         ]
     ]);
+        Route::resource('orders', OrderController::class, [
+        'names' => [
+            'index' => 'orders.index',
+        ]
+    ])->only(['index']);
 });
 
 require __DIR__.'/auth.php';
