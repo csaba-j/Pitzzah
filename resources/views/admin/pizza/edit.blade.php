@@ -3,7 +3,7 @@
         <div class="max-w-7xl mx-auto sm:px-4 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg md:max-w-7xl">
                 <div class="p-3 sm:p-6 text-gray-900 shadow-lg">
-                <a href="{{url()->previous()}}"><button class="w-1/4 bg-pizzaname py-2 px-4">Vissza</button></a>
+                <x-back-button></x-back-button>
                     <form method="POST" name="confirmPizzaEdit" action="{{ route('pizza.update', ['pizza' => $pizza]) }}" enctype="multipart/form-data"
                         class="flex flex-col flex-wrap gap-y-2"
                     >
