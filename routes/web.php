@@ -59,6 +59,11 @@ Route::middleware('admin')->group(function() {
             'destroy' => 'pizza.destroy'
         ]
     ]);
+
+    Route::get('pizza/{id}/confirmdelete', function($id){
+        return view('admin.pizza.confirm-delete', ['pizza' => \App\Models\Pizza::getById($id)]);
+    })->name('pizza.confirmdelete');
+
         Route::resource('orders', OrderController::class, [
         'names' => [
             'index' => 'orders.index',
