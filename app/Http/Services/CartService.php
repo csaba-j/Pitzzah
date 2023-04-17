@@ -24,6 +24,7 @@ class CartService
         }
 
         Session::put('cart', $cart);
+        CartService::addTotalToSession();
         Session::flash('message', 'Hozzáadva a kosárhoz!');
     }
 
@@ -38,11 +39,13 @@ class CartService
         }
 
         Session::put('cart', $cart);
+        CartService::addTotalToSession();
         Session::flash('message', 'Sikeres szerkesztés!');
     }
 
     public static function deleteCart() {
         Session::forget('cart');
+        Session::forget('total');
         Session::flash('message', 'A kosár törölve.');
     }
 
@@ -50,7 +53,15 @@ class CartService
         $cart = Session::get('cart');
         unset($cart[$request->get('id')]);
         count($cart) > 0 ? Session::put('cart', $cart ) : Session::forget('cart');
+        CartService::addTotalToSession();
         Session::flash('message', 'A tétel törölve.');
+    }
+
+    public static function addTotalToSession() {
+        if (Session::has('cart')) {
+            $total = CartService::calculateTotal();
+            Session::put('total', $total);
+        } return;
     }
 
     public static function calculateTotal() {

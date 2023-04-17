@@ -10,6 +10,7 @@
                 @csrf
                     <button type="submit" class="rounded bg-pizzared mx-16 mb-4 p-2 md:px-6 md:py-4">Kosár törlése</button>
                 </form>
+                <span>Végösszeg: {{$total}}</span>
                 @foreach($cart as $pizza)
                 <div class="p-3 sm:p-6 text-gray-900 shadow-lg flex flex-row flex-wrap gap-x-2 items-center">
                     <img src="{{asset($pizza->img)}}" alt="pizza" class="w-4/12 relative row-start-4 row-end-7">

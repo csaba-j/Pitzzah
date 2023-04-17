@@ -35,7 +35,7 @@ class OrderController extends Controller
         $order = Order::create([
             'user_id' => Auth::id(),
             'items' => $cart,
-            'total' => CartService::calculateTotal()
+            'total' => Session::has('total') ? Session::get('total') : throw new Exception('Total is null on order store.')
         ]);
         Session::flash('message', 'A megrendelését sikeresen fogadtuk!');
         Session::forget('cart');

@@ -9,7 +9,7 @@ use App\Http\Services\CartService;
 class CartController extends Controller
 {
     public function show() {
-        return view('cart', ['cart' => Session::get('cart')]);
+        return view('cart', ['cart' => Session::get('cart'), 'total' => Session::get('total')]);
     }
     
     public function add(Request $request) {
