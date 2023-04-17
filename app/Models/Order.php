@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Pizza extends Model
+class Order extends Model
 {
     use HasFactory;
 
@@ -15,17 +15,17 @@ class Pizza extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'category',
-        'img',
-        'price'
+        'user_id',
+        'items',
+        'total',
     ];
 
-    public static function getAll() {
-        return Pizza::all();
-    }
-
-    public static function getById($id) {
-        return Pizza::find($id);
-    }
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array<string, string>
+     */
+    protected $casts = [
+        'items' => 'array',
+    ];
 }

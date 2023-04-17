@@ -11,12 +11,15 @@
                     <div class="text-sm sm:text-lg flex-1">
                         {{$pizza->name}} <br> {{$pizza->price}} Ft. <br> <span class="text-xs md:text-base">{{$pizza->category}}</span>
                     </div>
-                    <div class="text-sm sm:text-lg">
-                        <form method="POST" name="orderForm">
-                            <input type="number" name="{{$pizza->id}}-amount" step="1" min="0" class="w-20">
-                            <label for="{{$pizza->id}}-amount">db</label>
-                        </form>
-                    </div>
+                    <form method="POST" name="orderForm" action="{{ route('cart.add') }}">
+                        @csrf
+                        <div class="text-sm sm:text-lg">
+                                <input type="number" name="id" value="{{$pizza->id}}" hidden>
+                                <input type="number" name="amount" step="1" min="0" class="w-20">
+                                <label for="amount">db</label>
+                        </div>
+                        <button type="submit">Send</button>
+                    </form>
                 </div>    
                 @endforeach
             </div>

@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\OrderController;
+use App\Http\Services\CartService;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,9 +24,14 @@ Route::get('/dashboard', function () {
     return view('dashboard', ['pizzas' => \App\Models\Pizza::all()]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/order', function () {
-    return view('order',  ['pizzas' => \App\Models\Pizza::all()]);
-})->middleware(['auth', 'verified'])->name('order');
+Route::post('/cart/add', [CartService::class, 'addToCart'])->name('cart.add');
+
+Route::resource('order', OrderController::class, [
+    'names' => [
+        'store' => 'order.store',
+        'create' => 'order.create'
+    ]
+])->middleware(['auth', 'verified']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

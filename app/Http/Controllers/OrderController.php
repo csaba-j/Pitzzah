@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Pizza;
+use App\Models\Order;
+use Illuminate\Support\Facades\Auth;
 
-class PizzaController extends Controller
+class OrderController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,7 +21,7 @@ class PizzaController extends Controller
      */
     public function create()
     {
-        //
+        return view('order',  ['pizzas' => \App\Models\Pizza::all()]);
     }
 
     /**

@@ -15,9 +15,14 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Kezdőlap') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('order')" :active="request()->routeIs('order')">
+                    <x-nav-link :href="route('order.create')" :active="request()->routeIs('order.create')">
                         {{ __('Rendelés') }}
                     </x-nav-link>
+                    @if(Session::has('cart'))
+                    <x-nav-link class="" :href="route('cart.show')" :active="request()->routeIs('cart.show')">
+                        <img src="{{asset('cart.png')}}">
+                    </x-nav-link>
+                    @endif
                 </div>
             </div>
 
@@ -73,7 +78,7 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('order')" :active="request()->routeIs('order')">
+            <x-responsive-nav-link :href="route('order.create')" :active="request()->routeIs('order.create')">
                 {{ __('Rendelés') }}
             </x-responsive-nav-link>
         </div>
