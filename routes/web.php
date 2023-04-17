@@ -19,7 +19,7 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('dashboard', ['pizzas' => \App\Models\Pizza::all()]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/order', function () {

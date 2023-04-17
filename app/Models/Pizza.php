@@ -20,4 +20,8 @@ class Pizza extends Model
         'img',
         'price'
     ];
+
+    public static function getAll() {
+        return Pizza::all();
+    }
 }
