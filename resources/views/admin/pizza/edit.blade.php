@@ -26,6 +26,11 @@
                             Mentés
                         </button>
                     </form>
+                    <a href="{{route('pizza.confirmdelete', ['id' => $pizza->id])}}">
+                        <button class="rounded bg-pizzaname basis-full w-full mt-4 md:mt-6 p-2 md:px-6 md:py-4">
+                            Törlés
+                        </button>
+                    </a>
                 </div>    
             </div>
         </div>

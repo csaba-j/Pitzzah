@@ -71,6 +71,9 @@ class PizzaController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $pizza = Pizza::getById($id);
+        Storage::disk('public')->delete($pizza->img);
+        $pizza->delete();
+        return redirect()->to('/pizza');
     }
 }
