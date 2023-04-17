@@ -15,7 +15,8 @@ module.exports = {
             },
         },
         colors: {
-            'pizzared': '#ff2b06'
+            'pizzared': '#ff2b06',
+            'pizzaname': '#f4dba5'
         }
     },
 

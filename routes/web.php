@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\CartController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,13 +20,25 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::resource('order', OrderController::class, [
+        'names' => [
+            'store' => 'order.store',
+            'create' => 'order.create'
+        ]
+    ]);
+    Route::get('/dashboard', function () {
+        return view('dashboard', ['pizzas' => \App\Models\Pizza::all()]);
+    })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/order', function () {
-    return view('order');
-})->middleware(['auth', 'verified'])->name('order');
+    Route::get('/cart', [CartController::class, 'show'])->name('cart.show');
+    Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
+    Route::post('/cart/edit', [CartController::class, 'edit'])->name('cart.edit');
+    Route::post('/cart/remove', [CartController::class, 'remove'])->name('cart.remove');
+    Route::post('/cart/delete', [CartController::class, 'delete'])->name('cart.delete');
+
+    Route::get('/cart/get-cart', [CartController::class, 'get']);
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

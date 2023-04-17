@@ -17,6 +17,9 @@
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
             @include('layouts.navigation')
+            @if(Session::has('message'))
+            {{Session::get('message')}}
+            @endif
 
             <!-- Page Heading -->
                 <header>
