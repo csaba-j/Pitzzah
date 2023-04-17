@@ -87,13 +87,22 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('order.create')" :active="request()->routeIs('order.create')">
-                {{ __('Rendelés') }}
-            </x-responsive-nav-link>
-            @if(Session::has('cart'))
-                    <x-responsive-nav-link class="" :href="route('cart.show')" :active="request()->routeIs('cart.show')">
-                        <div class="inline-flex flex-row gap-x-2 items-center">Kosár<img src="{{asset('cart.png')}}"></div>
-                    </x-responsive-nav-link>
+            @if(Auth::user()->is_admin)
+                        <x-responsive-nav-link :href="route('pizza.index')" :active="request()->routeIs('pizza.index')">
+                            {{ __('Pizzák') }}
+                        </x-responsive-nav-link>
+                        <x-responsive-nav-link :href="route('orders.index')" :active="request()->routeIs('orders.index')">
+                            {{ __('Rendelések') }}
+                        </x-responsive-nav-link>
+            @else
+                <x-responsive-nav-link :href="route('order.create')" :active="request()->routeIs('order.create')">
+                    {{ __('Rendelés') }}
+                </x-responsive-nav-link>
+                @if(Session::has('cart'))
+                        <x-responsive-nav-link class="" :href="route('cart.show')" :active="request()->routeIs('cart.show')">
+                            <div class="inline-flex flex-row gap-x-2 items-center">Kosár<img src="{{asset('cart.png')}}"></div>
+                        </x-responsive-nav-link>
+                @endif
             @endif
         </div>
 
