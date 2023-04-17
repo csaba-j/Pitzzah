@@ -32,6 +32,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->middleware(['auth', 'verified'])->name('dashboard');
     Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
     Route::get('/cart', [CartController::class, 'show'])->name('cart.show');
+    Route::post('/cart/remove', [CartController::class, 'remove'])->name('cart.remove');
+    Route::post('/cart/delete', [CartController::class, 'delete'])->name('cart.delete');
 });
 
 Route::middleware('auth')->group(function () {

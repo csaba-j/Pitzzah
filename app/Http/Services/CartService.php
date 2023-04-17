@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Session;
 class CartService
 {
     public static function addToCart(Request $request) {
-        Session::put('msg', 'asd');
         $pizza = Pizza::getById($request->get('id'));
         $cart = Session::get('cart') ?: [];
         if(isset($cart[$pizza->id])) {
@@ -22,5 +21,17 @@ class CartService
          }
         Session::put('cart', $cart);
         Session::flash('message', 'Hozzáadva a kosárhoz!');
+    }
+
+    public static function deleteCart() {
+        Session::forget('cart');
+        Session::flash('message', 'A kosár törölve.');
+    }
+
+    public static function removeItem(Request $request) {
+        $cart = Session::get('cart');
+        unset($cart[$request->get('id')]);
+        count($cart) > 0 ? Session::put('cart', $cart ) : Session::forget('cart');
+        Session::flash('message', 'A tétel törölve.');
     }
 }

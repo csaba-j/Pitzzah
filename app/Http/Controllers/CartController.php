@@ -16,4 +16,14 @@ class CartController extends Controller
         CartService::addToCart($request);
         return redirect()->back();
     }
+
+    public function delete() {
+        CartService::deleteCart();
+        return redirect()->to('dashboard');
+    }
+
+    public function remove(Request $request) {
+        CartService::removeItem($request);
+        return Session::has('cart') ? redirect()->back() : redirect()->to('dashboard');
+    }
 }
