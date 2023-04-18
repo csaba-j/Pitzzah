@@ -29,6 +29,10 @@ class PizzaController extends Controller
      */
     public function store(Request $request)
     {
+        $validated = $request->validate([
+            'img' => 'required|mimes:jpg,jpeg,png|file|size:1536',
+        ]);
+
         $new_filename = $request->file('img')->getClientOriginalName().'.'.$request->file('img')->getClientOriginalExtension();
         $pizza = Pizza::create([
             'name' => $request->get('name'),
