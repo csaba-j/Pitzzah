@@ -21,7 +21,9 @@ class CartController extends Controller
      * Adds an item to the shopping cart.
      */
     public function add(Request $request) {
-        CartService::addToCart($request);
+        if($request->get('amount') > 0) {
+            CartService::addToCart($request);
+        }
         return redirect()->back();
     }
 
