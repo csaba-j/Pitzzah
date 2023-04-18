@@ -16,11 +16,11 @@
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
-            @unless(isset($noNavigation))
-                @include('layouts.navigation')
-            @endunless
+            @include('layouts.navigation')
             @if(Session::has('message'))
-            {{Session::get('message')}}
+            <div class="w-full text-center my-4">
+                {{Session::get('message')}}
+            </div>
             @endif
 
             <!-- Page Content -->
