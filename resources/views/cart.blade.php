@@ -14,12 +14,12 @@
                 @csrf
                     <button type="submit" class="rounded bg-lime-500 mx-16 mb-4 p-2 md:px-6 md:py-4">Megrendelés</button>
                 </form>
-                <div class="w-full text-center">Végösszeg: {{$total}}</div>
+                <div class="w-full text-center">Végösszeg: {{$total}} Ft</div>
                 @foreach($cart as $pizza)
                 <div class="p-3 sm:p-6 text-gray-900 shadow-lg flex flex-row flex-wrap gap-x-2 items-center">
                     <img src="{{asset($pizza->img)}}" alt="pizza" class="w-4/12 relative row-start-4 row-end-7">
                     <div class="text-sm sm:text-lg flex-1">
-                        {{$pizza->name}} <br> {{$pizza->price}} Ft. <br> <span class="text-xs md:text-base">{{$pizza->category}}</span>
+                        {{$pizza->name}} <br> {{$pizza->price}} Ft <br> <span class="text-xs md:text-base">{{$pizza->category}}</span>
                     </div>
                     <form method="POST" name="editForm" action="{{ route('cart.edit') }}">
                     @csrf

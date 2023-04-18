@@ -14,7 +14,9 @@ class CartController extends Controller
      * Show the cart page with the cart contents.
      */
     public function show() {
-        return view('cart', ['cart' => Session::get('cart'), 'total' => Session::get('total')]);
+        if(Session::has('cart')){
+            return view('cart', ['cart' => Session::get('cart'), 'total' => Session::get('total')]);
+        } else return redirect()->to('dashboard');
     }
     
     /**
@@ -31,7 +33,9 @@ class CartController extends Controller
      * Edits a single item in the shopping cart.
      */
     public function edit(Request $request) {
-        Session::has('cart') ? CartService::editItem($request) : throw new Exception('Cart is null on edit.');
+        if(Session::has('cart')) {
+            CartService::editItem($request);
+        }
         return redirect()->back();
     }
 

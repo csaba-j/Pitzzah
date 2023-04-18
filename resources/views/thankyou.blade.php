@@ -5,7 +5,11 @@
     <div class="py-2">
         <div class="max-w-7xl mx-auto sm:px-4 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg md:max-w-7xl">
+            <div class="w-full text-center my-4">
                 <h1 class="text-center text-lg sm:text-2xl">Köszönjük megrendelését!</h1>
+                <span>Végösszeg: {{$total}} Ft</span>
+            </div>
+                <a href="{{route('dashboard')}}"><button>Vissza a főoldalra</button></a>>
                 <h3 class="text-center text-base sm:text-lg">Megrendelt tételek:</h3>
                 @foreach($cart as $pizza)
                 <div class="p-3 sm:p-6 text-gray-900 shadow-lg flex flex-wrap gap-x-2 justify-between">
@@ -18,9 +22,6 @@
                         </div>
                 </div>    
                 @endforeach
-                <span>Végösszeg: {{$total}}</span>
-
-                <a href="{{route('dashboard')}}"><button>Vissza a főoldalra</button></a>
             </div>
         </div>
     </div>

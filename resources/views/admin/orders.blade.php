@@ -7,6 +7,7 @@
                 <div class="border border-solid rounded p-4 basis-full">
                     <div class="flex flex-column flex-wrap gap-x-4">
                         <span class="basis-full font-bold">Megrendelő: {{$order->user_name}}</span>
+                        <span class="basis-full font-bold">Telefon: {{$order->user_phone}}</span>
                         <span class="basis-full font-bold">Végösszeg: {{$order->total}} Ft</span>
                     </div>
                     <div class="flex flex-column flex-wrap gap-x-2">

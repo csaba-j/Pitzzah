@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained();
             $table->string('user_name');
+            $table->string('user_phone');
             $table->json('items');
             $table->integer('total');
             $table->timestamps();
