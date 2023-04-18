@@ -22,10 +22,16 @@ class Pizza extends Model
         'price'
     ];
 
+    /**
+     * Gets all the pizzas from the database.
+     */
     public static function getAll() {
         return Pizza::all();
     }
 
+    /**
+     * Gets a single pizza from the database based on its id.
+     */
     public static function getById($id) {
         return Pizza::find($id);
     }
