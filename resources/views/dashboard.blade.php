@@ -1,4 +1,5 @@
 <x-app-layout>
+@include('layouts.header')
     <x-slot name="header">
     </x-slot>
 

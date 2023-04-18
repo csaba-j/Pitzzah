@@ -17,7 +17,10 @@ module.exports = {
         colors: {
             'pizzared': '#ff2b06',
             'pizzaname': '#f4dba5',
-            'lime-500': 'rgb(132 204 22)'
+            'lime-500': 'rgb(132 204 22)',
+            'red-600': 'rgb(220 38 38)',
+            'gray-300': 'rgb(209 213 219)',
+            'transparent': 'transparent'
         }
     },
 

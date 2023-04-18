@@ -10,7 +10,11 @@
                 @csrf
                     <button type="submit" class="rounded bg-pizzared mx-16 mb-4 p-2 md:px-6 md:py-4">Kosár törlése</button>
                 </form>
-                <span>Végösszeg: {{$total}}</span>
+                <form method="POST" name="confirmOrder" action="{{ route('order.store') }}">
+                @csrf
+                    <button type="submit" class="rounded bg-lime-500 mx-16 mb-4 p-2 md:px-6 md:py-4">Megrendelés</button>
+                </form>
+                <div class="w-full text-center">Végösszeg: {{$total}}</div>
                 @foreach($cart as $pizza)
                 <div class="p-3 sm:p-6 text-gray-900 shadow-lg flex flex-row flex-wrap gap-x-2 items-center">
                     <img src="{{asset($pizza->img)}}" alt="pizza" class="w-4/12 relative row-start-4 row-end-7">
@@ -29,14 +33,10 @@
                         <form method="POST" name="removeForm" action="{{ route('cart.remove') }}">
                         @csrf
                             <input type="number" name="id" value="{{$pizza->id}}" hidden>
-                            <button type="submit" class=" rounded bg-pizzared mt-4 md:mt-6 p-2 md:px-6 md:py-4">Eltávolít</button>
+                            <button type="submit" class=" rounded bg-pizzared p-2 md:px-6 md:py-4">Eltávolít</button>
                         </form>
                 </div>    
                 @endforeach
-                <form method="POST" name="confirmOrder" action="{{ route('order.store') }}">
-                @csrf
-                    <button type="submit" class="rounded bg-green mx-16 mb-4 p-2 md:px-6 md:py-4">Megrendelés</button>
-                </form>
             </div>
         </div>
     </div>

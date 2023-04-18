@@ -12,30 +12,40 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Kezdőlap') }}
-                    </x-nav-link>
-                    @if(Auth::user()->is_admin)
-                        <x-nav-link :href="route('pizza.index')" :active="request()->routeIs('pizza.index')">
-                            {{ __('Pizzák') }}
+                    @if(Auth::user())
+                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                            {{ __('Kezdőlap') }}
                         </x-nav-link>
-                        <x-nav-link :href="route('orders.index')" :active="request()->routeIs('orders.index')">
-                            {{ __('Rendelések') }}
-                        </x-nav-link>
-                    @else
-                        <x-nav-link :href="route('order.create')" :active="request()->routeIs('order.create')">
-                            {{ __('Rendelés') }}
-                        </x-nav-link>
-                        @if(Session::has('cart'))
-                        <x-nav-link class="" :href="route('cart.show')" :active="request()->routeIs('cart.show')">
-                            <div class="inline-flex flex-row gap-x-2 items-center"><img src="{{asset('cart.png')}}"><span class="m-0">Kosár</span></div>
-                        </x-nav-link>
+                        @if(Auth::user()->is_admin)
+                            <x-nav-link :href="route('pizza.index')" :active="request()->routeIs('pizza.index')">
+                                {{ __('Pizzák') }}
+                            </x-nav-link>
+                            <x-nav-link :href="route('orders.index')" :active="request()->routeIs('orders.index')">
+                                {{ __('Rendelések') }}
+                            </x-nav-link>
+                        @else
+                            <x-nav-link :href="route('order.create')" :active="request()->routeIs('order.create')">
+                                {{ __('Rendelés') }}
+                            </x-nav-link>
+                            @if(Session::has('cart'))
+                            <x-nav-link class="" :href="route('cart.show')" :active="request()->routeIs('cart.show')">
+                                <div class="inline-flex flex-row gap-x-2 items-center"><img src="{{asset('cart.png')}}"><span class="m-0">Kosár</span></div>
+                            </x-nav-link>
+                            @endif
                         @endif
+                    @else
+                    <x-nav-link :href="route('login')" :active="request()->routeIs('login')">
+                            {{ __('Bejelentkezés') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('register')" :active="request()->routeIs('register')">
+                            {{ __('Regisztráció') }}
+                    </x-nav-link>
                     @endif
                 </div>
             </div>
 
             <!-- Settings Dropdown -->
+            @if(Auth::user())
             <div class="hidden sm:flex sm:items-center sm:ml-6">
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
@@ -52,7 +62,7 @@
 
                     <x-slot name="content">
                         <x-dropdown-link :href="route('profile.edit')">
-                            {{ __('Profile') }}
+                            {{ __('Profil') }}
                         </x-dropdown-link>
 
                         <!-- Authentication -->
@@ -62,12 +72,13 @@
                             <x-dropdown-link :href="route('logout')"
                                     onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-                                {{ __('Log Out') }}
+                                {{ __('Kijelentkezés') }}
                             </x-dropdown-link>
                         </form>
                     </x-slot>
                 </x-dropdown>
             </div>
+            @endif
 
             <!-- Hamburger -->
             <div class="-mr-2 flex items-center sm:hidden">
@@ -84,8 +95,9 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
+        @if(Auth::user())
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
+                {{ __('Kezdőlap') }}
             </x-responsive-nav-link>
             @if(Auth::user()->is_admin)
                         <x-responsive-nav-link :href="route('pizza.index')" :active="request()->routeIs('pizza.index')">
@@ -104,9 +116,18 @@
                         </x-responsive-nav-link>
                 @endif
             @endif
+        @else
+        <x-responsive-nav-link :href="route('login')" :active="request()->routeIs('login')">
+                {{ __('Bejelentkezés') }}
+        </x-responsive-nav-link>
+        <x-responsive-nav-link :href="route('register')" :active="request()->routeIs('register')">
+                {{ __('Regisztráció') }}
+        </x-responsive-nav-link>
+        @endif
         </div>
 
         <!-- Responsive Settings Options -->
+        @if(Auth::user())
         <div class="pt-4 pb-1 border-t border-gray-200">
             <div class="px-4">
                 <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
@@ -115,7 +136,7 @@
 
             <div class="mt-3 space-y-1">
                 <x-responsive-nav-link :href="route('profile.edit')">
-                    {{ __('Profile') }}
+                    {{ __('Profil') }}
                 </x-responsive-nav-link>
 
                 <!-- Authentication -->
@@ -125,10 +146,11 @@
                     <x-responsive-nav-link :href="route('logout')"
                             onclick="event.preventDefault();
                                         this.closest('form').submit();">
-                        {{ __('Log Out') }}
+                        {{ __('Kijelentkezés') }}
                     </x-responsive-nav-link>
                 </form>
             </div>
         </div>
+        @endif
     </div>
 </nav>
