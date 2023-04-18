@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>{{ config('app.name', 'Pitzzah') }}</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -16,17 +16,12 @@
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
-            @include('layouts.navigation')
+            @unless(isset($noNavigation))
+                @include('layouts.navigation')
+            @endunless
             @if(Session::has('message'))
             {{Session::get('message')}}
             @endif
-
-            <!-- Page Heading -->
-                <header>
-                    <div>
-                        <img src="{{asset('/slider.jpg')}}">
-                    </div>
-                </header>
 
             <!-- Page Content -->
             <main>

@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
@@ -21,11 +20,7 @@
             @endif
 
             <!-- Page Heading -->
-                <header>
-                    <div>
-                        <img src="{{asset('/slider.jpg')}}">
-                    </div>
-                </header>
+            @include('layouts.icon-header')
 
             <!-- Page Content -->
             <main>

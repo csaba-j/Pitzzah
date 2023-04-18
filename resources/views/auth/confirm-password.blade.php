@@ -1,6 +1,6 @@
 <x-guest-layout>
     <div class="mb-4 text-sm text-gray-600">
-        {{ __('Az adatai iztonsága érdekében kérjük adja meg a jelszavát.') }}
+        {{ __('Az adatai biztonsága érdekében kérjük adja meg a jelszavát.') }}
     </div>
 
     <form method="POST" action="{{ route('password.confirm') }}">
